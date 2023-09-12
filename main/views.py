@@ -1,11 +1,7 @@
 from django.shortcuts import render
-from django.shortcuts import render
+from main.models import Product
 
 # Create your views here.
 def show_main(request):
-    context = {
-        'name': 'Aldyandry N',
-        'class': 'PBP B'
-    }
-
-    return render(request, "main.html", context)
+    products = Product.objects.all()
+    return render(request, 'main.html', {'products': products})

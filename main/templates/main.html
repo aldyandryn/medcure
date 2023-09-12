@@ -1,6 +1,26 @@
-<h1>MedCure Page</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCure</title>
+</head>
+
+<body>
+    {% load humanize %}
+    <h1>Semua Obat</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <a href="/obat/{{ product.id }}">{{ product.name }}</a>
+            <p>Rp.{{product.price|intcomma}}</p>
+            <p>Deskripsi: {{product.description}}</p>
+            <p>Sisa Stok: {{product.amount}}</p>
+            <p>Tanggal: {{product.date_added}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
