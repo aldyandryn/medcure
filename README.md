@@ -184,7 +184,7 @@ Kelas: PBP B
      - `description` berupa `TextField`
      - `date_added` berupa `DateField`
      - `price` berupa `IntegerField`
-       Setelah itu, migrasikan model dengan `python manage.py makemigrations` dan apply ke database dengan `python manage.py migrate`
+   - Setelah itu, migrasikan model dengan `python manage.py makemigrations` dan apply ke database dengan `python manage.py migrate`
 
 5. Ubah berkas `views.py` dengan membuat fungsi `show-main` yang mereturn `render(request, "main.html", context)` untuk menampilkan `main.html` menggunakan data dari dictionary `context` sewaktu ada `request` dari user
 
