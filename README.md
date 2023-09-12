@@ -193,21 +193,46 @@ Kelas: PBP B
 
 
   
-## Bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+## Bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya 
+![image](https://github.com/aldyandryn/medcure/assets/73996348/abd6981a-e303-4bb4-a5bd-b4a88524c73b)
 
-## Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+
+## Mengapa kita menggunakan virtual environment? 
 *Virtual Environment* merupakan alat yang membantu para *developer* dalam mengembangkan *software* di mana mereka dapat menginstal hal-hal yang diperlukan dalam proyeknya. Hal ini supaya *dependencies* tidak terganggu satu sama lain. Beberapa alasan mengapa kita menggunakan VE:
 1. Menggunakan *virtual environment* memungkinkan kita untuk memiliki *dependencies* yang berbeda untuk proyek yang berbeda tanpa masalah. Misalnya, jika satu proyek membutuhkan versi Django tertentu dan proyek lain memerlukan *dependencies* yang berbeda, virtual environment memungkinkan kita untuk menjalankan kedua proyek tersebut pada *device* yang sama tanpa masalah.
 2. Menggunakan VE dapat memudahkan kita untuk memahami *dependencies* apa saja yang diperlukan oleh sebuah proyek. Jika kita menghapus *virtual environment*, kita dapat yakin bahwa kita memanglah tidak menghapus *dependencies* atau perangkat lunak yang mungkin diperlukan oleh proyek lain.
 3. Ada kemungkinan *hardware* kita memiliki *dependencies* yang sudah diinstal, tetapi tidak *compatible* atau mungkin kontras dengan proyek yang sedang dibuat. Jadi, VE dapat mencegah dari konflik tersebut.
 4.  *Virtual environment* memudahkan *testing* dengan berbagai *dependencies*, sehingga  dapat memastikan bahwa aplikasi dapat berfungsi di berbagai konfigurasi.
-      
- 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur veniam minus saepe obcaecati qui sit, ipsam commodi iste itaque nostrum accusamus maiores dolore amet molestiae. Animi eos sapiente ipsa quis!
 
 
- 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor odit, iste, totam accusamus deleniti soluta. Doloremque adipisci blanditiis nobis cupiditate quam expedita, consequatur nam neque vel tenetur tempore, sint aperiam.
- 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur veniam minus saepe obcaecati qui sit, ipsam commodi iste itaque nostrum accusamus maiores dolore amet molestiae. Animi eos sapiente ipsa quis!
+## Perbedaan MVC, MVT, dan MVVM
+1. MVC (Model-View-Controller)
+   - **Model** : Mewakili data atau logika bisnis karena merupakan bagian yang bertanggung jawab dalam mengakses data, pertanyaan *database*, dan pembaruan *database*
+   - **View** : Menampilkan data karena merupakan antarmuka pengguna yang akan dilihat oleh pengguna
+   - **Controller** : Menerima input dari pengguna melalui *view*, lalu memprosesnya (dengan bantuan *Model* jika diperlukan), kemudian akan mengembalikan tampilan yang pas
+   - **Contoh** : *Framework* Spring (Java) dan Express (Javascript dengan Node.js)
 
-## This Is *Markdown* Sample File
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam accusantium nam impedit explicabo excepturi suscipit iste tempore quae, iure, eaque laboriosam fugit, assumenda nostrum et. Rem eaque, cupiditate consequatur tempora!  
-`membuat` <b>Bold</b> 
+ 2. MVT (Model-View-Template):
+    Konsepnya mirip dengan MVC. Namun, dalam konteks framework Django (yang populer menggunakan MVT), perbedaannya terutama ada pada bagian "View"
+    - **Model**: Sama seperti dalam MVC, mewakili data atau logika bisnis.
+    - **View**: Dalam MVT, View lebih mendekati *controller* pada MVC. *View*
+menangani logika bisnis dan menetapkan tampilan mana yang harus
+ditampilkan.
+    - **Template**: Ini adalah bagian yang menampilkan informasi untuk pengguna (mirip dengan View dalam MVC).
+    - **Contoh**: Django adalah contoh utama dari *framework* yang mengikuti pola MVT.
+
+3. MVVM (Model-View-ViewModel): Biasanya digunakan untuk aplikasi yang mengandalkan binding data dua arah.
+   - **Model**: Mewakili data atau logika bisnis.
+   - **View**: Menampilkan data, tetapi dengan MVVM, View adalah yang pasif dan hanya bertanggung jawab untuk menampilkan apa yang diberitahu oleh ViewModel.
+   - **ViewModel**: Bertindak sebagai perantara antara Model dan View. ViewModel menyediakan data dalam format yang mudah digunakan oleh View dan dapat merespons terhadap perubahan data yang dilakukan oleh View.
+   - **Contoh**: *Frameworks* seperti KnockoutJS, Angular, dan Xamarin sering kali mengikuti pola MVVM.
+
+
+ ## Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+
+Ya, bisa. Namun, ketika jumlah proyek dan dependencies yang kita kerjakan
+meningkat, akan ada kemungkinan ditemukannya suatu masalah dan risiko akan
+adanya *problem* juga semakin meningkat. Oleh karenanya, *virtual
+environment* disarankan digunakan karena dapat menjaga konsistensi dan
+mengoptimalkan proses pengembangan menjadi lebih lancar.
+
