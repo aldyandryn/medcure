@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<h1>{{nama_aplikasi}}</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedCure</title>
-</head>
+<h3>Nama: </h3>
+<p>{{nama}}<p>
 
-<body>
-    {% load humanize %}
-    <h1>Semua Obat</h1>
-    <ul>
-        {% for product in products %}
-        <li>
-            <a href="/obat/{{ product.id }}">{{ product.name }}</a>
-            <p>Rp.{{product.price|intcomma}}</p>
-            <p>Deskripsi: {{product.description}}</p>
-            <p>Sisa Stok: {{product.amount}}</p>
-            <p>Tanggal: {{product.date_added}}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-
-</html>
+<h3>Kelas: </h3>
+<p>{{kelas}}<p>
