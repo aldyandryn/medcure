@@ -7,5 +7,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     date_added = models.DateField(auto_now_add=True)
     price = models.IntegerField()
-    amount = models.IntegerField()
+    amount = models.IntegerField(default=0)
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
