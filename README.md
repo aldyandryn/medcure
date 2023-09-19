@@ -238,3 +238,40 @@ environment* disarankan digunakan karena dapat menjaga konsistensi dan
 mengoptimalkan proses pengembangan menjadi lebih lancar.
 
 =======
+
+# Tugas 3
+
+## Apa perbedaan antara form `POST` dan form `GET` dalam Django?
+
+**Fungsi:**
+- GET: Lebih sering diterapkan untuk memperoleh informasi dari server. Misalnya, ketika Anda melakukan pencarian di web atau menjelajahi laman, Anda mungkin menggunakan metode GET.
+- POST: Lebih ditujukan untuk menyampaikan informasi ke server. Situasinya mirip ketika Anda mengisikan sebuah formulir online, mungkin untuk pendaftaran atau memberi komentar.
+  
+**Cara Menyimpan Informasi:**
+- GET: Informasi dikirim melalui parameter di alamat web. Misalnya, saat Anda mencari "Django", alamat web mungkin menjadi: http://example.com/search?query=Django.
+- POST: Informasi ditempatkan dalam bagian tubuh permintaan dan oleh karena itu tidak muncul di alamat web.
+
+**Kapasitas Informasi:**
+- GET: Terdapat keterbatasan dalam panjang alamat web yang varianya tergantung pada browser dan server. Ini membatasi berapa banyak informasi yang dapat dikirim dengan metode GET.
+- POST: Tidak ada pembatasan panjang seperti yang ditemui di GET, sehingga memungkinkan pengiriman informasi dalam volume yang lebih besar.
+  
+**Aspek Keamanan:**
+- GET: Mengingat informasi muncul di alamat web, metode GET tidak ideal untuk informasi sensitif, misalnya password. Juga, alamat web berisiko tersimpan di riwayat browser atau difavoritkan.
+- POST: Ini lebih aman karena informasi disembunyikan dari alamat web. Walaupun demikian, keamanan tambahan seperti penggunaan HTTPS tetap dianjurkan.
+  
+**Konsistensi:**
+- GET: Harus konsisten atau idempoten, artinya permintaan GET yang sama harus menghasilkan respons yang sama tanpa merubah apapun di server.
+- POST: Tidak selalu konsisten. Permintaan POST yang sama mungkin menghasilkan respons yang berbeda, seperti penambahan data baru di database.
+  
+**Integrasi dengan Django:**
+GET: Di Django, data dari form GET bisa diakses menggunakan request.GET.
+POST: Sedangkan untuk form POST, Anda mengambilnya dengan request.POST.
+
+Berikut tabel perbedaan GET dan POST dari [W3Schools](https://www.w3schools.com/tags/ref_httpmethods.asp "W3Schools")
+![image](https://github.com/aldyandryn/medcure/assets/73996348/a9e249d4-4f53-4531-ac24-4defcb67efdc)
+
+# Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+
+# Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+
+#  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
