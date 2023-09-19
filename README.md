@@ -264,8 +264,8 @@ mengoptimalkan proses pengembangan menjadi lebih lancar.
 - POST: Tidak selalu konsisten. Permintaan POST yang sama mungkin menghasilkan respons yang berbeda, seperti penambahan data baru di database.
   
 **Integrasi dengan Django:**
-GET: Di Django, data dari form GET bisa diakses menggunakan request.GET.
-POST: Sedangkan untuk form POST, Anda mengambilnya dengan request.POST.
+- GET: Di Django, data dari form GET bisa diakses menggunakan request.GET.
+- POST: Sedangkan untuk form POST, Anda mengambilnya dengan request.POST.
 
 Berikut tabel perbedaan GET dan POST dari [W3Schools](https://www.w3schools.com/tags/ref_httpmethods.asp "W3Schools")
 ![image](https://github.com/aldyandryn/medcure/assets/73996348/a9e249d4-4f53-4531-ac24-4defcb67efdc)
