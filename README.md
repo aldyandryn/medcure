@@ -239,7 +239,7 @@ mengoptimalkan proses pengembangan menjadi lebih lancar.
 
 =======
 
-# Tugas 3
+## Tugas 3
 
 ## Apa perbedaan antara form `POST` dan form `GET` dalam Django?
 
@@ -463,8 +463,8 @@ Berikut tabel perbedaan GET dan POST dari [W3Schools](https://www.w3schools.com/
     - `(url)/xml/(desired_id)`: Untuk menampilkan product dengan id yang diinginkan dalam format JSON
 <hr>
 
-## 5. Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md
-Note: Saya sempat menghapus product ke-1 (pk="1") dan ke-5 (pk="5") sehingga tidak ada pk="1" dan pk="5"
+## Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md
+Note: Menghapus product ke-1 (pk="1") dan ke-5 (pk="5") sehingga tidak ada pk="1" dan pk="5"
 1. HTML:
    ![image](https://github.com/aldyandryn/medcure/assets/73996348/167c0547-95bb-4b29-86a1-b46a4e01dc34)
 
@@ -486,3 +486,4 @@ Note: Saya sempat menghapus product ke-1 (pk="1") dan ke-5 (pk="5") sehingga tid
 - [Geeksforgeeks](https://www.geeksforgeeks.org)
 - [Dataxml](https://www.deltaxml.com/blog/xml/whats-the-relationship-between-xml-json-html-and-the-internet/#:~:text=The%20differences%20between%20XML%2C%20JSON,how%20that%20data%20is%20displayed.)
   
+===
