@@ -3,6 +3,7 @@ from main.models import *
 from django.http import *
 from main.forms import *
 from django.urls import *
+from .models import Product
 
 
 # Create your views here.
@@ -15,8 +16,8 @@ def show_main(request):
     products = Product.objects.all()
 
     context = {
-        'name': 'Pak Bepe', # Nama kamu
-        'class': 'PBP A', # Kelas PBP kamu
+        'name': 'Aldyandry', # Nama kamu
+        'class': 'PBP B', # Kelas PBP kamu
         'products': products
     }
 
@@ -42,3 +43,11 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+def delete_first_rhinos(request):
+    # Cari produk "Rhinos" yang pertama
+    rhinos_product = Product.objects.filter(name="Rhinos").first()
+    if rhinos_product:
+        rhinos_product.delete()
+
+    # Setelah menghapus, redirect ke halaman yang diinginkan, misalnya halaman daftar produk
+    return redirect('nama_url_halaman_daftar_produk')
