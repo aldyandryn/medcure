@@ -272,6 +272,40 @@ Berikut tabel perbedaan GET dan POST dari [W3Schools](https://www.w3schools.com/
 
 # Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
 
-# Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+**Susunan dan Bentuk:**
+- XML (eXtensible Markup Language): Ini adalah jenis bahasa markup yang memberikan ketentuan dalam menulis dokumen sehingga mudah dipahami oleh manusia dan komputer. Meskipun XML memiliki kemiripan dalam penggunaan tag dengan HTML, tag-tag tersebut bersifat fleksibel dan dapat disesuaikan oleh pengguna.
+- JSON (JavaScript Object Notation): Ini adalah bentuk ringkas untuk transmisi data yang simpel untuk dibaca oleh manusia serta mudah diinterpretasi dan digenerasi oleh mesin. JSON memiliki kesamaan dengan struktur objek di JavaScript.
+- HTML (HyperText Markup Language): Merupakan bahasa markup primer untuk pembuatan laman web. Fokus utamanya adalah presentasi konten kepada pengguna, bukan murni pertukaran data.
+  
+**Tujuan Utama:**
+- XML: Diciptakan dengan tujuan mengilustrasikan data berdasarkan esensi data itu sendiri tanpa menekankan bagaimana penampilannya. Dalam konteks web, XML biasa digunakan untuk transmisi data antara browser dan server.
+- JSON: Telah menjadi standar populer dalam transmisi data, terutama untuk aplikasi yang berlandaskan RESTful API, berkat efisiensinya dan kemudahan interpretasi di berbagai platform pemrograman.
+- HTML: Fokus utamanya adalah penyajian informasi dalam format web kepada pengguna. Ini bukan alat optimal untuk pertukaran data antar platform.
+  
+**Daya Baca:**
+- XML: Walaupun manusia dapat memahaminya, XML dapat terlihat rumit dengan keberadaan berbagai tag yang berulang.
+- JSON: Menawarkan keterbacaan yang lebih baik dibanding XML karena bentuknya yang lebih intuitif tanpa kebutuhan tag berulang.
+- HTML: Dibuat dengan pertimbangan estetika dan struktur, oleh karena itu mungkin mengandung beragam tag dan atribut yang kurang esensial dalam konteks murni pengiriman data.
+
+**Informasi Tambahan:**
+- XML: Memberikan dukungan untuk atribut di dalam tag, memfasilitasi penyimpanan data tambahan.
+- JSON: Berbeda dengan XML, JSON tidak memfasilitasi atribut. Semua informasi disajikan dalam format pasangan kunci-nilai.
+- HTML: Walaupun memiliki atribut di dalam tag, prioritasnya lebih kepada presentasi daripada transmisi data.
+
+**Integrasi dengan Platform Pemrograman:**
+XML: Meski didukung oleh sejumlah besar platform pemrograman, interpretasi XML mungkin membutuhkan library khusus.
+JSON: Diakui dan didukung oleh hampir semua bahasa pemrograman kontemporer, seringkali dengan kemudahan interpretasi dan serialisasi.
+HTML: Browser web sudah dilengkapi dengan kemampuan interpretasi HTML. Namun, untuk platform pemrograman lain, library khusus mungkin diperlukan.
+
+# Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern
+
+- **Kejelasan Struktur**: JSON menawarkan format yang intuitif dan jelas, memudahkan baik manusia maupun komputer untuk memahami. Desainnya yang berorientasi pada pasangan kunci-nilai sangat mirip dengan struktur data di banyak bahasa pemrograman, menjadikannya mudah untuk diintegrasikan.
+- **Efisiensi Ukuran**: Jika dibandingkan dengan standar lain seperti XML, JSON cenderung lebih padat dan singkat. Hal ini berkontribusi pada transmisi data yang lebih efisien dan penggunaan bandwidth yang minimal.
+- **Kompatibilitas Tinggi**: Sebagian besar bahasa pemrograman saat ini memiliki alat atau fitur bawaan untuk memproses JSON. Hal ini mempermudah pertukaran informasi antara sistem dengan teknologi yang beragam.
+- **Sintaksis Sederhana**: Berbeda dengan XML yang membutuhkan tag tambahan untuk setiap elemen, JSON lebih langsung dalam pendekatannya.
+- **Sinergi dengan JavaScript**: Mengingat latar belakang JSON yang berasal dari JavaScript, kerjasama antara keduanya di lingkungan web sangatlah erat.
+- **Kemampuan Adaptasi**: JSON dapat merepresentasikan data dengan kompleksitas tinggi, seperti list atau objek bertingkat, tanpa memerlukan definisi tambahan.
+- **Dominasi di RESTful APIs**: Sejumlah besar API yang menganut prinsip REST (Representational State Transfer) memilih JSON sebagai format standar respons mereka, yang memperkuat popularitas JSON di komunitas developer.
+- **Aspek Keamanan** : Meski keamanan perlu selalu diperhatikan, menggunakan JSON—dengan pendekatan yang tepat—cenderung lebih terlindungi dari ancaman khusus yang mungkin muncul saat mengolah XML.
 
 #  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
