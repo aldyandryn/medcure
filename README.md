@@ -528,6 +528,104 @@ Atau praktisnya, saat ingin mengakses data sesi di Django, kita dapat melakukann
 - Cookies bisa memancing untuk mengunjungi situs yang berbahaya
 **Jadi**, penggunaan cookies tidak sepenuhnya aman secara default. Banyak risiko keamanan dan privasi yang perlu kita waspadai.
 
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- [ ] Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+    ```python
+        def register(request):
+            form = UserCreationForm()
+
+            if request.method == "POST":
+                form = UserCreationForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, 'Your account has been successfully created!')
+                    return redirect('main:login')
+            context = {'form':form}
+            return render(request, 'register.html', context)
+
+        def login_user(request):
+            if request.method == 'POST':
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    response = HttpResponseRedirect(reverse("main:show_main")) 
+                    response.set_cookie('last_login', str(datetime.datetime.now()))
+                    return response
+                else:
+                    messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+            context = {}
+            return render(request, 'login.html', context)
+
+        def logout_user(request):
+            logout(request)
+            response = HttpResponseRedirect(reverse('main:login'))
+            response.delete_cookie('last_login')
+            return response
+    ```
+    - `response.setcookie('last_login', str(datetime.datetime.now()))` digunakan untuk menyimpan waktu terakhir user yang bersangkutan login pada cookie
+    - Tambahkan `'last_login': request.COOKIES['last_login'],` pada context di views.py untuk mengakses cookie last_login
+    - Tambahkan `@login_required(login_url='/login')` di atas function show_main pada views.py untuk memastikan hanya logged in user yang bisa akses
+    - Tambahkan potongan kode berikut pada urls.py untuk handle routing:
+    ```python
+    path('register/', register, name='register'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'), 
+    ```
+    - Buat template yang akan digunakan untuk masing-masing routing dari views.py (klik untuk mengakses):
+        - [register.html](main/templates/register.html)
+        - [main.html](main/templates/main.html)
+        - [login.html](main/templates/login.html)
+
+- [ ] Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+    - Buka `localhost:8000` dan register untuk 3 username dengan username yang berbeda dan password
+    - Login ntuk ketiga user tersebut, kemudian buat 2 product/item baru dengan klik tombol `Add New Product` dan isi seluruh detail product yang diinginkan
+    - Setelah selesai coba cek apakah product yang ditambahkan sudah ada di tabel
+    - Apabila sudah benar, seharusnya setiap user memiliki tabel dengan isi product yang berbeda-beda
+ Notes: Disini saya belum berhasil
+
+- [ ] Menghubungkan model Item dengan User.
+    - Tambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE)` pada class Product di models.py untuk initiate Many to One relationship (karena menggunakan ForeignKey) pada User dengan Product/Item.
+    - Ubah views.py pada bagian:
+    ```python
+    def create_product(request):
+        form = ProductForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+    - Tambahkan `products = Product.objects.filter(user=request.user)` dan ubah context untuk key 'name'
+    ```python
+    def show_main(request):
+        products = Product.objects.filter(user=request.user)
+
+        context = {
+            'name': request.user.username,
+        ...
+        }
+    ```
+    - Lakukan migration untuk menyimpan perubahan
+
+- [ ] Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+    - Untuk menampilkan username dan class user dapat menggunakan potongan kode berikut pada main.html:
+    ```html
+    <p>Name: {{name}}</p> 
+    <p>Class: {{class}}</p>
+    ```
+    - Untuk menampilkan data last login user dapat memanfaatkan Cookies dengan menggunakan potongan kode berikut pada main.html:
+    ```html
+    <p>Sesi terakhir login: {{ last_login }}</p>
+    ```
+    - Untuk mengimplementasikan cookiesnya sebagai berikut:
+        - `response.set_cookie('last_login', str(datetime.datetime.now()))` pada function login_user di views.py untuk set cookie kapan user login terakhir kali
+        - `response.delete_cookie('last_login')` pada function logout_user di views.py untuk menghapus cookie
+        - `'last_login': request.COOKIES['last_login'],` pada context function show_main di views.py 
+
+<hr>
 
 ## Referensi
 - [Django UserCreationForm| Creating New User](https://www.javatpoint.com/django-usercreationform)
