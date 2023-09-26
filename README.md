@@ -487,3 +487,50 @@ Note: Menghapus product ke-1 (pk="1") dan ke-5 (pk="5") sehingga tidak ada pk="1
 - [Dataxml](https://www.deltaxml.com/blog/xml/whats-the-relationship-between-xml-json-html-and-the-internet/#:~:text=The%20differences%20between%20XML%2C%20JSON,how%20that%20data%20is%20displayed.)
   
 ===
+## Tugas 4
+
+## Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
+UserCreationForm pada Django digunakan untuk membuat *user* baru yang dapat menggunakan web yang kita buat. Form ini memiliki tiga fields: username, password1, dan password2 yang biasanya digunakan untuk konfirmasi *password* kita.
+
+**Kelebihan**
+- Hemat waktu karena ini merupakan pre-defined form sehingga tidak perlu memulainya dari awal
+- Aman secara default karena menangani validasi dan keamanan dasar dan memastikan *password* memenuhi persyaratan default Django
+- *Adjustable* karena kita dapat memperluas dan menambahkan kolom tambahan atau validasi
+- *Maintained by Django's core team*
+
+**Kekurangan**
+- Kolom yang terbatas karena hanya ada tiga *fields* tadi
+- Terkadang tidak sesuai dengan *complex requirements* karena *too simple*
+- *Potential overhead*, biasanya kalau menggunakan *custom model*
+
+## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+
+**Autentikasi**
+Tujuan utamanya adalah untuk memverifikasi apakah pengguna adalah diri mereka sendiri.
+Dengan kata lain, saat pengguna mencoba masuk ke sistem, autentikasi akan memastikan data mereka adalah benar dan sesuai dengan apa yang ada di sistem.
+Hal ini adalah langkah pertama dalam memastikan keamanan web. Jika autentikasi gagal, maka pengguna tidak dapat mengakses sistem sama sekali.
+
+**Otorisasi**
+Setelah autentikasi berhasil, otorisasi ini akan menentukan apa yang boleh dilakukan oleh pengguna yang sudah terautentikasi, seperti apakah mereka diperbolehkan untuk mengakses atau mengedit halaman tertentu, dll.
+
+**Keduanya penting karena** demi keamanan aplikasi web. Autentikasi memastikan bahwa hanya pengguna yang sah yang dapat mengakses aplikasi, sementara otorisasi memastikan bahwa pengguna hanya dapat melakukan tindakan yang mereka izinkan untuk dilakukan.
+Tanpa autentikasi, aplikasi akan rentan terhadap malware dan tanpa otorisasi, akan ada kemungkinan pengguna melakukan sembarangan aksi.
+
+## Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+Cookies adalah potongan kecil data yang disimpan di browser dan sering digunakan untuk mengingat informasi tentang pengguna, seperti sesi login, dll. 
+Fungsi cookies adalah sebagai data yang disimpan browser yang digunakan untuk mengidentifikasi pengguna.
+Untuk mengelola data sesi pengguna, cookies digunakan di Django untuk mengidentifikasi sesi terakit. Jadi, setiap pengguna mengakses situs, Django dapat mengidentifikasi  sesi pengguna dan data sesi dari suatu id dan akan disimpan di basis data.
+Atau praktisnya, saat ingin mengakses data sesi di Django, kita dapat melakukannya dari objek request dengan atribut tertentu untuk menetapkan value di dalamnya. Selanjutnya, Django akan otomatis mengatur mekanisme yang melibatkan sesi dengan request.
+
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+- Cookies sendiri tidak menimbulkan risiko keamanan, namun bisa digunakan cybercriminal untuk mengimpersonasi pengguna dan mengakses akun mereka.
+- Cybercriminal bisa menggunakan cookies untuk membuat situs yang tampak dapat diakses di browser
+- Cookies bisa memancing untuk mengunjungi situs yang berbahaya
+**Jadi**, penggunaan cookies tidak sepenuhnya aman secara default. Banyak risiko keamanan dan privasi yang perlu kita waspadai.
+
+
+## Referensi
+- [Django UserCreationForm| Creating New User](https://www.javatpoint.com/django-usercreationform)
+- [User authentication in Django](https://docs.djangoproject.com/en/4.2/topics/auth/#user-authentication-in-django)
+- [Django Tutorial Part 7: Sessions framework](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Sessions)
+- [Ensuring Cybersecurity with Cookies: Best Practices and Tips](https://www.devoteam.com/expert-view/cybersecurity-cookies/)
