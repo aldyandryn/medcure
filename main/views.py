@@ -42,6 +42,7 @@ def create_product(request):
         item = form.save(commit=False)
         item.user = request.user
         item.save()
+        messages.success(request, 'Item successfully added!')
         return HttpResponseRedirect(reverse('main:show_main'))
     context = {'form': form}
     return render(request, "create_product.html", context)
