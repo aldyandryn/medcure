@@ -88,3 +88,20 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+def increase_amount(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    item.amount += 1
+    item.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+def decrease_amount(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    if item.amount > 0:  # Ensure the amount doesn't go negative
+        item.amount -= 1
+        item.save()
+    else: 
+        messages.info(request, f'Jumlah sudah 0, tidak bisa dikurangi lagi!')
+    return HttpResponseRedirect(reverse('main:show_main'))
+def remove_item(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    item.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))

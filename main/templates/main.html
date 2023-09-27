@@ -46,6 +46,23 @@
                 <td>{{item.description}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.date_added}}</td>
+                <td>
+                    <a href="{% url 'main:increase_amount' item.id %}">
+                        <button>
+                            Add Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:decrease_amount' item.id %}">
+                        <button>
+                            Decrease Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:remove_item' item.id %}">
+                        <button>
+                            Remove Item
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -61,5 +78,7 @@
             Logout
         </button>
     </a>
+    
     <h5>Sesi terakhir login: {{ last_login }}</h5>
+
 {% endblock content %}
