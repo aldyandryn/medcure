@@ -624,8 +624,71 @@ Atau praktisnya, saat ingin mengakses data sesi di Django, kita dapat melakukann
         - `response.set_cookie('last_login', str(datetime.datetime.now()))` pada function login_user di views.py untuk set cookie kapan user login terakhir kali
         - `response.delete_cookie('last_login')` pada function logout_user di views.py untuk menghapus cookie
         - `'last_login': request.COOKIES['last_login'],` pada context function show_main di views.py 
-
+ ## Cara mengerjakan bonus
+ - tambahkan kode berikut di views.py untuk keperluan increase/decrease jumlah dan remove produk
+   ```
+   def increase_amount(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    item.amount += 1
+    item.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+   def decrease_amount(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    if item.amount > 0:  # Ensure the amount doesn't go negative
+        item.amount -= 1
+        item.save()
+    else: 
+        messages.info(request, f'Jumlah sudah 0, tidak bisa dikurangi lagi!')
+    return HttpResponseRedirect(reverse('main:show_main'))
+   def remove_item(request, id):
+    item = get_object_or_404(Item, pk=id, user=request.user)
+    item.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+   - buka **urls.py** dan tambahkan ini di **urlpatterns**
+     ```
+     ....
+     path('increase/<int:id>/', increase_amount, name='increase_amount'),
+     path('decrease/<int:id>/', decrease_amount, name='decrease_amount'),
+     path('remove/<int:id>/', remove_item, name='remove_item'),
+     ]
+     ```
+     Jangan lupa untuk memodifikasi  importnya menjadi:
+     `from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id, increase_amount, decrease_amount, remove_item`
+     - modifikasi loop di **main.html** menjadi:
+       ```
+       {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.date_added}}</td>
+                <td>
+                    <a href="{% url 'main:increase_amount' item.id %}">
+                        <button>
+                            Add Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:decrease_amount' item.id %}">
+                        <button>
+                            Decrease Amount
+                        </button>
+                    </a>
+                    <a href="{% url 'main:remove_item' item.id %}">
+                        <button>
+                            Remove Item
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    ```
+       
+    
 <hr>
+
 
 ## Referensi
 - [Django UserCreationForm| Creating New User](https://www.javatpoint.com/django-usercreationform)
