@@ -23,13 +23,15 @@ from django.core import serializers
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    Items = Item.objects.filter(user=request.user)
+    items = Item.objects.filter(user=request.user)
+     # Menggunakan .get() untuk menghindari KeyError
+    last_login = request.COOKIES.get('last_login', 'Belum Pernah Login')
 
     context = {
         'name': request.user.username,
         'class': 'PBP B', # Kelas PBP kamu
-        'items': Items,
-        'last_login': request.COOKIES['last_login'],
+        'items': items,
+        'last_login': last_login,
     }
 
     return render(request, "main.html", context)

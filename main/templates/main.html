@@ -39,22 +39,21 @@
     
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
     
-        {% for product in products %}
+        {% for item in items %}
             <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.amount}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.date_added}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.date_added}}</td>
             </tr>
         {% endfor %}
     </table>
     
     <br />
-    
     <a href="{% url 'main:create_product' %}">
         <button>
-            Add New Product
+            Add New Item
         </button>
     </a>
     <a href="{% url 'main:logout' %}">
@@ -62,6 +61,5 @@
             Logout
         </button>
     </a>
-    
     <h5>Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}

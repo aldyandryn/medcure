@@ -6,6 +6,7 @@ from main.views import login_user #sesuaikan dengan nama fungsi yang dibuat
 from main.views import logout_user
 
 
+
 app_name = 'main'
 
 urlpatterns = [
