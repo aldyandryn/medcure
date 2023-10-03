@@ -1,37 +1,49 @@
 {% extends 'base.html' %}
 
-{% block meta %}
-    <title>Login</title>
-{% endblock meta %}
+{% block additional_head %}
+    <style>
+        .login {
+            max-width: 10px;
+            margin: 50px auto;
+            padding: 10px;
+            border: 10px solid #bfe2fd;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px #d8c7fe;
+        }
+        
+        .login h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Libre Caslon Text', serif;
+        }
+    </style>
+{% endblock additional_head %}
 
 {% block content %}
 
-<div class = "login">
+<div class="login">
 
-    <h1>Login</h1>
+    <h1>Login MedCure</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+        </div>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+        </div>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Login">
+        </div>
     </form>
 
     {% if messages %}
-        <ul>
+        <ul class="alert alert-danger">
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
