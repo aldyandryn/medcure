@@ -695,3 +695,85 @@ Atau praktisnya, saat ingin mengakses data sesi di Django, kita dapat melakukann
 - [User authentication in Django](https://docs.djangoproject.com/en/4.2/topics/auth/#user-authentication-in-django)
 - [Django Tutorial Part 7: Sessions framework](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Sessions)
 - [Ensuring Cybersecurity with Cookies: Best Practices and Tips](https://www.devoteam.com/expert-view/cybersecurity-cookies/)
+
+------
+# Tugas 5
+## 1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya. 
+CSS selector adalah salah satu rule set dari Css yang fungsinya untuk memilih suatu elemen yang ingin diberi gaya atau style css. 
+**Universal Selector** = Kalau kita ingin memilih semua elemen. Gunanya untuk membuat seluruh tag HTML menjadi sesuai dengan style yang dibuat
+**Element Type Selector** = Kalau kita ingin memilih elemen berdasarkan nama tag-nya. Gunanya untuk memilih elemen yang kita mau saja untuk di styling
+**Class Selector** = Kalau kita ingin memilih atribut tertentu berdasarkan kelasnya. Gunanya untuk men-styling elemen tertentu yang memiliki kelas yang sama.
+**ID Selector** = Hampir sama dengan class selector, tapi kita memilih elemen berdasarkan atribut ID-nya
+**Attribute Selector** = Kalau kita ingin mencari seluruh tag yang memiliki atribut dan nilai yang sama. Jadi, gunanya untuk men-styling kedua hal tersebut
+
+## 2. Jelaskan HTML5 Tag yang kamu ketahui.
+HTML5 merupakan perbaikan dari HTML sehingga dapat mendukung kebutuhan saat ini, seperti membuat website yang mobile-friendly.
+- h1 - h6: untuk heading, h1 merupakan heading paling atas dengan prioritas tertinggi
+- acronym: untuk akronim
+- article: untuk artikel
+- audio: untuk konten suara
+- b: untuk bold teks
+- div: untuk section di document
+- figure: untuk group of media content
+- img: untuk image, dll
+
+
+## 3. Jelaskan perbedaan antara margin dan padding.
+Basically, margin digunakan untuk menata letak dari sisi luar, meanwhile padding dari sisi dalam. Margin tidak dapat memiliki unsur warna, sedangkan padding bisa. Jadi, padding adalah ruang antara elemen dan konten di dalamnya sedangkan margin adalah ruang di sekitar elemen.
+
+## 4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Secara umum, Bootstrap lebih difokuskan kepada tingkat responsif dan mobilitas-nya, sedangkan untuk Tailwind lebih mengutamakan utilitasnya.
+Jadi, Bootstrap akan lebih cocok untuk kamu yang ingin praktis karena bootstrap merupakan komponen UI yang siap pakai dan tanpa perlu disesuaikan kembali.Bootstrap cenderung stabil dan mudah digunakan. Sedangkan, tailwind sebaiknya digunakan kalau kamu menyukai pendekatan utility first sehingga memungkinkan kita untuk membangun desain yang sangat kuston sesuai kebutuhan.
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step
+- Menambahkan Bootstrap, JS, CSS ke `base.html`.
+  ```
+  <head>
+    {% block meta %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+   </head>
+    ```
+  ```
+  <head>
+    {% block meta %}
+        ...
+    {% endblock meta %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+```
+
+```
+<head>
+    ...
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+</head>
+```
+- Menambahkan navbar di `main.html`
+  ```
+  <<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">MedCure</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+             <!-- Menambahkan tombol logout di sini -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  ```
+  - Saya melakukan styling register, create product, dan login dengan bootstrap
+  - Kemudian, untuk membuat card, saya menggunakan class card bootstrap
+ 
+  ## Referensi
+  - [Mengenal Jenis-jenis Selector Dasar CSS](https://www.duniailkom.com/tutorial-belajar-css-mengenal-jenis-jenis-selector-dasar-css/#google_vignette)
+  - [Pengertian Selector Pada CSS](https://www.babastudio.com/blog/selector-pada-css)
+  - [Cheatsheet HTML5](https://www.google.com/search?q=html5+cheat+sheet&tbm=isch&chips=q:html5+cheat+sheet,online_chips:list+pdf:8uNcwMhRbA0%3D&hl=id&sa=X&ved=2ahUKEwiGo-jBjtqBAxU_z6ACHQ6ZDVkQ4lYoAHoECAEQJw&biw=621&bih=569#imgrc=6t4G90k1ZcjB1M)
+  - [Apa Perbedaan Margin dan Padding](https://kotakode.com/pertanyaan/6133/Apa-perbedaan-margin-dan-padding%3F)
+  - [Perbedaan Bootstrap dan Tailwind](https://codepolitan.com/blog/perbedaan-bootstrap-dan-tailwind)
+  
