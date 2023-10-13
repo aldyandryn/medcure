@@ -695,3 +695,195 @@ Atau praktisnya, saat ingin mengakses data sesi di Django, kita dapat melakukann
 - [User authentication in Django](https://docs.djangoproject.com/en/4.2/topics/auth/#user-authentication-in-django)
 - [Django Tutorial Part 7: Sessions framework](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Sessions)
 - [Ensuring Cybersecurity with Cookies: Best Practices and Tips](https://www.devoteam.com/expert-view/cybersecurity-cookies/)
+
+# Tugas 6
+
+## Perbedaan asynchronous dengan synchronous programming
+- Asynchronus Programming :
+  - Dalam proses sinkron, setiap fungsi berjalan satu per satu dan kita harus menunggu hingga fungsi pertama selesai sebelum memulai yang berikutnya (bersifat blocking)
+  - Mengizinkan eksekusi beberapa tugas secara simultan adalah penting untuk efisiensi program, sehingga tidak perlu menunggu tugas tertentu selesai.
+  - Ini melibatkan penerapan callback, janji, atau sintaksis async/await untuk menentukan tindakan yang harus diambil setelah suatu operasi rampung, alih-alih hanya menunggu sampai selesai.
+
+- Synchronus Programming :
+  - Sementara pada proses asinkron, kita bisa menjalankan fungsi lain tanpa harus menunggu fungsi sebelumnya rampung (bersifat non-blocking).
+  - Ketika sebuah tugas bertemu dengan operasi yang membutuhkan waktu, ia akan menunggu hingga operasi itu rampung sebelum melanjutkan, yang kadang membuat program berbasis synchronus menjadi kurang optimal.
+  - Lebih sederhana dalam penulisan dan pemahaman karena jalannya program bersifat berurutan (tanpa melibatkan callback, dan sejenisnya).
+
+## Paradigma *event-driven programming* dan contohnya
+- Event-Driven Programming memiliki konsep yang mirip dengan pemrograman berbasis prosedur, di mana keduanya melibatkan input, proses, dan output. Namun, yang membedakannya adalah mekanisme pemilihan dalam mengeksekusi alur program. Dalam Event-Driven Programming, jalannya program ditentukan oleh sebuah event atau peristiwa, yang bisa berasal dari tindakan pengguna atau pesan dari aplikasi lain.
+- Contohnya pada tugas ini adalah penerapan tombol add product, jadi sewaktu diklik akan masuk ke fungsi addProduct
+
+## Penerapan asynchronous programming pada AJAX
+- Dalam AJAX, asynchronous programming memungkinkan permintaan data ke server atau operasi I/O lainnya untuk dilaksanakan secara tidak berurutan, memungkinkan program untuk terus berjalan sambil menunggu balasan dari server tanpa henti. 
+
+## Perbandingan Fetch API dan Library JQuery
+- Fetch API lebih modern karena tidak memerlukan library, sintaksnya lebih modern tetapi mungkin tidak mudah untuk dibaca, lebih banyak fitur,dibuat khusus untuk AJAX
+- JQuery perlu library lain, sintaksnya berbeda namun lebih mudah dibaca, lebih luas dukungannya, fitur terbatas
+
+Saya pribadi prefer menggunakan Fetch API dalam konteks AJAX karena lebih modern dan lebih cocok untuk AJAX karena memang dibuat khusus untuk AJAX
+
+## Implementasi Checklist
+1. Mengubah tugas 5 menjadi menggunakan AJAX :
+  - AJAX GET :
+    - Mengubah div untuk card pada **main.html**
+    ```
+    <div id="products-container" class="row"></div>
+    ```
+    - Pengambilan data menggunakan AJAX GET sekaligus di dalamnya merubah card supaya mendukung AJAX GET
+    ```
+    <script>
+    async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+    async function refreshProducts() {
+            const productsContainer = document.getElementById("products-container");
+            productsContainer.innerHTML = "";  // Clear container before adding new cards
+
+            const products = await getProducts();
+            products.forEach((item) => {
+                const increaseAmountUrl = `{% url 'main:increase_amount' 9999 %}`.replace('9999', item.pk);
+                const decreaseAmountUrl = `{% url 'main:decrease_amount' 9999 %}`.replace('9999', item.pk);
+                const removeItemUrl = `{% url 'main:remove_item' 9999 %}`.replace('9999', item.pk);
+
+                const cardHtml = `
+                    <div class="col-md-4 product-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.fields.name}</h5>
+                                <p class="card-text">Amount: ${item.fields.amount}</p>
+                                <p class="card-text">Description: ${item.fields.description}</p>
+                                <p class="card-text">Price: ${item.fields.price}</p>
+                                <p class="card-text">Date Added: ${item.fields.date_added}</p>
+                                <a href="${increaseAmountUrl}" class="btn btn-success">Add Amount</a>
+                                <a href="${decreaseAmountUrl}" class="btn btn-warning">Decrease Amount</a>
+                                <a href="${removeItemUrl}" class="btn btn-danger">Remove Item</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsContainer.innerHTML += cardHtml;
+            });
+        }   
+    </script>
+    ```
+
+- AJAX POST
+    - Membuat fungsi di views.py untuk menambahkan item
+    ```
+    def get_product_json(request):
+        item_item = Item.objects.filter(user=request.user)
+        return HttpResponse(serializers.serialize('json', item_item))
+
+    @csrf_exempt
+    def create_item_ajax(request):
+        if request.method == 'POST':
+            name = request.POST.get("name")
+            amount = request.POST.get("amount")
+            description = request.POST.get("description")
+            price = request.POST.get("price")
+            user = request.user
+
+            new_item = Item(name=name, amount=amount,description=description,price=price,user=user)
+            new_item.save()
+
+            return HttpResponse(b"CREATED", status=201)
+
+        return HttpResponseNotFound()
+    ```
+    - Melakukan routing di urls.py
+    ```
+     path('get-product/', get_product_json, name='get_product_json'),
+     path('create-ajax/',create_item_ajax,name='create_item_ajax')
+    ```
+
+    - Membuat modal form untuk form AJAX nya
+    ```
+        <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Add New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form untuk menambahkan produk -->
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input class="form-control" id="price" name="price"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+    -   Membuat tombol untuk modal
+    ```
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+        Add Product by AJAX
+      </button>
+    ```
+    - Membuat fungsi addProducts untuk menghubungkan ke modal
+    ```
+    <script>
+    ...
+    function addProduct() {
+            // Skrip AJAX untuk menambahkan produk
+            fetch("{% url 'main:create_item_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.getElementById('form')),
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    refreshProducts();
+                    document.getElementById("form").reset();
+                } else {
+                    console.error('Error adding product:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
+            return false;
+        }
+        document.getElementById("button_add").onclick = addProduct
+        refreshProducts();
+    </script>
+    ```
+2. Melakukan setting untuk deployment sesuai dengan  tutorial 2:
+`DOKKU_APP_NAME` valuenya diganti menjadi `aldyandry-nureza-tugas`
+
+3. Jika ingin `collecstatic` tinggal jalankan perintah
+    ```
+    python manage.py collectstatic
+    ```
+
+# referensi:
+- [Apa Itu Asynchronous Programming?](https://prosigmaka.com/article/apa-itu-asynchronous-programming/)
+- [APA ITU PEMOGRAMMAN EVENT DRIVEN?](https://muhammadriandiandika.blogspot.com/2017/07/apa-itu-pemogramman-event-driven.html)
+- [Mengenal Fungsi Asynchronous Request di Javascript](https://www.dicoding.com/blog/mengenal-fungsi-asynchronous-request-pada-javascript/)
+- [Mana yang lebih populer, jQuery Ajax atau JS Fetch Ajax?](https://www.quora.com/Which-one-is-more-popular-jQuery-Ajax-or-JS-Fetch-Ajax)

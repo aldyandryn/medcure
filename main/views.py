@@ -20,6 +20,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
@@ -105,3 +107,22 @@ def remove_item(request, id):
     item = get_object_or_404(Item, pk=id, user=request.user)
     item.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
+def get_product_json(request):
+    item_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', item_item))
+
+@csrf_exempt
+def create_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        price = request.POST.get("price")
+        user = request.user
+
+        new_item = Item(name=name, amount=amount,description=description,price=price,user=user)
+        new_item.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
